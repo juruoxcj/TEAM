@@ -1,0 +1,64 @@
+{
+  "upstream": {
+    "model": {
+      "patch_enc_name": "vit_large_patch16_224.dinov2.uni_mass100k",
+      "backbone_model_name": "vit_large_patch16_224",
+      "backbone_img_size": 224,
+      "backbone_patch_size": 16,
+      "backbone_init_values": 1e-05,
+      "patch_feat_dim": 1024,
+      "slide_feat_dim": 512,
+      "uncertainty_samples": 3,
+      "dropout_rate": 0.3,
+      "attn_hidden_dim": 256,
+      "use_text": false,
+      "text_model_name": "dmis-lab/biobert-base-cased-v1.2",
+      "text_max_length": 256
+    },
+    "runtime": {
+      "device": "cuda",
+      "batch_size": 128,
+      "num_workers": 4,
+      "out_size": 224,
+      "use_fp16": false,
+      "output_mode": "slide",
+      "return_aux": false
+    },
+    "paths": {
+      "patch_ckpt": "./patch_weight.pth",
+      "slide_ckpt": "./slide_weight.pth",
+      "input": "",
+      "output": "",
+      "output_dir": "",
+      "clinical_text": "",
+      "text_json": "",
+      "batch_slides": false,
+      "limit_slides": -1
+    }
+  },
+  "downstream": {
+    "model": {
+      "patch_feat_dim": 1024,
+      "shared_dim": 512,
+      "stage_classes": 4,
+      "tme_classes": 8,
+      "gene_classes": 15717,
+      "num_cancers": 32,
+      "tau": 1.1,
+      "use_stage": true,
+      "use_tme": false,
+      "use_gene": false
+    },
+    "paths": {
+      "slide_ckpt": "",
+      "stage_ckpt": "",
+      "tme_ckpt": "",
+      "gene_ckpt": ""
+    },
+    "runtime": {
+      "device": "cuda",
+      "batch_size": 1,
+      "num_patches": 256
+    }
+  }
+}
