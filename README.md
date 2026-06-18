@@ -3,7 +3,6 @@
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-%E2%89%A52.1-ee4c2c.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-Apache--2.0-green.svg)](LICENSE)
-[![Model Card](https://img.shields.io/badge/HuggingFace-model%20card-yellow.svg)](huggingface_model_card/README.md)
 
 🚀 Official implementation for:
 
@@ -11,43 +10,7 @@
 
 Yixiao Mao, Chengjie Xie, Feng Li, Danyi Li, Wenyan Zhang, Yidan Zhang, Bingbing Li, Chenglong Zhao, Zhengyu Zhang, Ying Tan, Zhijian Cen, Haisu Tao, Jian Yang, Jian Wang, Qianjin Feng, Boxiang Liu, Li Liang, Cheng Lu, Yu Zhang and Zhenyuan Ning.
 
-TEAM provides a compact release for pathology feature extraction and downstream biomarker-driven prediction. The repository includes the source code, tested environment, demo patches, inference commands, expected outputs, model weight instructions, license and citation information.
-
-**Code:** https://github.com/juruoxcj/TEAM
-
-## 🔥 Highlights
-
-- 🧬 Patch-level pathology encoder and slide-level TEAM aggregator.
-- 🧠 Optional de-identified clinical-text conditioning for upstream aggregation.
-- 📊 Downstream Biomarker-driven TEAM model for outcome prediction.
-- 🧪 Six unmodified TCGA BRCA demo patches for a fast runnable example.
-- 📦 Hugging Face model card template for `patch_weight.pth` and `slide_weight.pth`.
-
-## 📌 News
-
-- **2026-06:** Initial open-source release prepared with demo data, Apache-2.0 license, tested Python 3.10 environment and Hugging Face model card.
-
-## 🖼️ Demo Patches
-
-The demo folder contains six original TCGA BRCA patch images copied without color modification or re-encoding:
-
-```text
-demo_data/slides/TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB/
-|-- patch_660.jpg
-|-- patch_661.jpg
-|-- patch_662.jpg
-|-- patch_663.jpg
-|-- patch_664.jpg
-`-- patch_665.jpg
-```
-
-<p>
-  <img src="demo_data/slides/TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB/patch_660.jpg" width="128" />
-  <img src="demo_data/slides/TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB/patch_661.jpg" width="128" />
-  <img src="demo_data/slides/TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB/patch_662.jpg" width="128" />
-</p>
-
-These patches are included only to demonstrate the expected input layout and run the software demo. They should not be used for scientific evaluation.
+TEAM provides a compact release for pathology feature extraction and downstream biomarker-driven prediction. This GitHub repository includes source code, tested environment files, demo input layout, inference commands, expected outputs, license and citation information. Model weights are distributed separately through the original email access process and a gated Hugging Face model repository.
 
 ## 🗂️ Repository Layout
 
@@ -66,8 +29,6 @@ These patches are included only to demonstrate the expected input layout and run
 |   |-- slide_texts.demo.json
 |   `-- slides/
 |       `-- TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB/
-|-- huggingface_model_card/
-|   `-- README.md
 |-- scripts/
 |   |-- run_team.py
 |   |-- run_biomarker_driven_team.py
@@ -134,13 +95,13 @@ TEAM uses two checkpoint files:
 | `patch_weight.pth` | patch-level pathology encoder checkpoint |
 | `slide_weight.pth` | slide-level TEAM aggregation checkpoint |
 
-The checkpoints are prepared for release on Hugging Face. The model card template is provided at [huggingface_model_card/README.md](huggingface_model_card/README.md). After creating the Hugging Face model repository, upload:
+The checkpoints are not stored in this GitHub repository. They are distributed through the original email access process and the gated Hugging Face model repository:
 
 ```text
-patch_weight.pth
-slide_weight.pth
-README.md  # copy from huggingface_model_card/README.md
+https://huggingface.co/ruoju059/TEAM
 ```
+
+Access to the Hugging Face weights requires approval before download.
 
 The default config expects root-level checkpoint names:
 
@@ -153,25 +114,7 @@ If checkpoints are stored elsewhere, update `configs/team_config.json` or pass `
 
 ## 🚀 Quick Start
 
-### 1. No-data downstream smoke test
-
-This check validates the downstream TEAM model graph with synthetic feature tensors. It does not require model weights, demo images or a GPU.
-
-```bash
-python scripts/smoke_test.py --device cpu --num_patches 8
-```
-
-Expected output:
-
-```text
-pred shape: (1, 1)
-fused_feat shape: (1, 512)
-[OK] TEAM downstream smoke test passed.
-```
-
-Expected run time on a normal desktop CPU is **less than 1 minute** after installation.
-
-### 2. Upstream demo feature extraction
+### Demo feature extraction
 
 After downloading `patch_weight.pth` and `slide_weight.pth`, run:
 
