@@ -20,18 +20,24 @@ from __future__ import annotations
 import os
 import argparse
 import json
+import sys
+from pathlib import Path
 from typing import Dict, List, Tuple
 
 import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from team.utils import list_images, list_slide_dirs, save_pt
 from team.dataset import PatchImageDataset, collate_fn
 from team.patho_team_encoder import EncoderConfig, TEAMPathologyFeatureEncoder
 from team.config import load_team_config
 
-WEIGHTS_URL = "https://drive.google.com/drive/folders/1tDbM1GanVYa09wrDsyaqL-F8MmmIlJr5?usp=drive_link"
+WEIGHTS_LOCATION = "Hugging Face model repository; see README.md Model Weights section"
 
 
 @torch.no_grad()
@@ -185,12 +191,12 @@ def main():
     if not args.patch_ckpt:
         raise ValueError(
             "patch_ckpt is required: set --patch_ckpt or upstream.paths.patch_ckpt in config. "
-            f"Official weights: {WEIGHTS_URL}"
+            f"Official weights: {WEIGHTS_LOCATION}"
         )
     if not args.slide_ckpt:
         raise ValueError(
             "slide_ckpt is required: set --slide_ckpt or upstream.paths.slide_ckpt in config. "
-            f"Official weights: {WEIGHTS_URL}"
+            f"Official weights: {WEIGHTS_LOCATION}"
         )
 
     if args.device.startswith("cuda") and not torch.cuda.is_available():

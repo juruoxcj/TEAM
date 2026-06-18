@@ -1,0 +1,31 @@
+{
+  "upstream": {
+    "runtime": {
+      "device": "cuda",
+      "batch_size": 4,
+      "num_workers": 0,
+      "out_size": 224,
+      "use_fp16": false,
+      "output_mode": "both",
+      "return_aux": false
+    },
+    "paths": {
+      "patch_ckpt": "./patch_weight.pth",
+      "slide_ckpt": "./slide_weight.pth",
+      "input": "./demo_data/slides/TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB",
+      "output": "./outputs/TCGA-A7-A13G-01Z-00-DX1.C258C545-8C1F-41D4-846F-962A746CBDFB.pt",
+      "output_dir": "./outputs/team_features",
+      "clinical_text": "",
+      "text_json": "",
+      "batch_slides": false,
+      "limit_slides": 1
+    }
+  },
+  "downstream": {
+    "runtime": {
+      "device": "cuda",
+      "batch_size": 1,
+      "num_patches": 8
+    }
+  }
+}
