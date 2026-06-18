@@ -255,10 +255,12 @@ This project is released under the Apache License 2.0. See [LICENSE](LICENSE).
 ## ✏️ Citation
 
 ```bibtex
-@article{team_pathology_2026,
-  title   = {An Interactive Trustworthy AI Pathology Copilot to Improve Biomarker-Driven Prognostic Stratification and Therapeutic Response Prediction},
-  author  = {Mao, Yixiao and Xie, Chengjie and Li, Feng and others},
-  journal = {Under Review},
-  year    = {2026}
+@article{mao2026interactive,
+  title={An Interactive Trustworthy AI Pathology Copilot to Improve Biomarker-Driven Prognostic Stratification and Therapeutic Response Prediction},
+  author={Mao, Yixiao and Xie, Chengjie and Li, Feng and Li, Danyi and Zhang, Wenyan and Zhang, Yidan and Li, Bingbing and Zhao, Chenglong and Zhang, Zhengyu and Tan, Ying and others},
+  journal={medRxiv},
+  pages={2026--05},
+  year={2026},
+  publisher={Cold Spring Harbor Laboratory Press}
 }
 ```
